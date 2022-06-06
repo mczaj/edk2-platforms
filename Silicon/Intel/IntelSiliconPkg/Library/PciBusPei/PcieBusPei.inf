@@ -1,0 +1,44 @@
+## @file
+#  Component description file for the PcieBusPei module
+#  This module is meant to be used in PEI Post-mem phase due to the resource usage.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+[Defines]
+INF_VERSION = 0x00010017
+BASE_NAME = PcieBusPei
+FILE_GUID = 95986bba-fc4d-4f66-b5d6-5938ba89216c
+VERSION_STRING = 1.0
+MODULE_TYPE = PEIM
+ENTRY_POINT = PcieBusEntryPoint
+
+
+[LibraryClasses]
+PeimEntryPoint
+PeiServicesLib
+DebugLib
+PciHostBridgeLib
+TimerLib
+MemoryAllocationLib
+BaseMemoryLib
+BaseLib
+
+[Packages]
+MdePkg/MdePkg.dec
+MdeModulePkg/MdeModulePkg.dec
+UefiCpuPkg/UefiCpuPkg.dec
+
+[Sources]
+PcieBusPei.c
+PciResources.c
+PciResourceHelpers.c
+
+[Ppis]
+gPciDevicesReadyPpiGuid
+gEdkiiIoMmuPpiGuid
+gEdkiiPeiPciDevicePpiGuid # PRODUCES
+
+[Depex]
+gEndOfSiInitPpiGuid
